@@ -38,7 +38,7 @@ class PokemonDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        nameLabel.text = pokemon.name
+        nameLabel.text = pokemon.name.capitalizedString
         mainImage.image = UIImage(named: "\(pokemon.pokedexId)")
         currentEvoImage.image = UIImage(named: "\(pokemon.pokedexId)")
         
@@ -56,7 +56,7 @@ class PokemonDetailVC: UIViewController {
         moveAccuracy.text = "Base Attack: "
 
         descriptionLabel.text = pokemon.description
-        typeLabel.text = pokemon.type
+        typeLabel.text = pokemon.type.capitalizedString
         defenseLabel.text = pokemon.defense
         heightLabel.text = pokemon.height
         weightLabel.text = pokemon.weight
@@ -86,7 +86,7 @@ class PokemonDetailVC: UIViewController {
         typeLabel.text = move.name
         
         movePower.text = "Power: "
-        defenseLabel.text = move.power
+        defenseLabel.text = move.power + " pp"
         
         moveCategory.text = "Category: "
         if move.category != "" {
@@ -100,10 +100,10 @@ class PokemonDetailVC: UIViewController {
         pokedexLabel.text = move.moveId
         
         moveLevelType.text = "Learn Type: "
-        weightLabel.text = move.learnType
+        weightLabel.text = move.learnType.capitalizedString
         
         moveAccuracy.text = "Accuracy: "
-        baseAttackLabel.text = move.accuracy
+        baseAttackLabel.text = move.accuracy + "%"
     }
 
     
