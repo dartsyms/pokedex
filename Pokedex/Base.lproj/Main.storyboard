@@ -212,6 +212,9 @@
                                             <segment title="Moves"/>
                                         </segments>
                                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="selectedSegmentAction:" destination="Avb-2M-p4h" eventType="valueChanged" id="joB-Ww-KbW"/>
+                                        </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Ahg-TZ-Ulk">
                                         <rect key="frame" x="0.0" y="49" width="560" height="120"/>
@@ -399,12 +402,19 @@
                     </view>
                     <connections>
                         <outlet property="baseAttackLabel" destination="zzn-Nb-hVe" id="UNO-7V-HLj"/>
+                        <outlet property="chooseSegment" destination="UYg-ze-miY" id="esK-s0-8T5"/>
                         <outlet property="currentEvoImage" destination="moc-gk-ekH" id="Bxj-hF-LQ8"/>
                         <outlet property="defenseLabel" destination="E7e-K1-2La" id="dMi-hM-2nM"/>
                         <outlet property="descriptionLabel" destination="faq-Xk-3Si" id="6es-df-URn"/>
                         <outlet property="evoLabel" destination="0WD-o6-Cuw" id="Epq-30-KZr"/>
                         <outlet property="heightLabel" destination="sst-du-dp8" id="D7R-bn-LWC"/>
                         <outlet property="mainImage" destination="5xl-y7-r8T" id="wdc-hO-7kU"/>
+                        <outlet property="moveAccuracy" destination="Atm-YF-qCY" id="b7G-8E-gek"/>
+                        <outlet property="moveCategory" destination="GsP-AT-VhV" id="JAk-hw-nIf"/>
+                        <outlet property="moveID" destination="rqB-zh-VuW" id="xdW-w9-bkG"/>
+                        <outlet property="moveLevelType" destination="CjP-RY-Dz9" id="L7s-Mw-IvH"/>
+                        <outlet property="moveName" destination="uy2-OJ-9Eo" id="d35-P2-bCW"/>
+                        <outlet property="movePower" destination="vDh-j5-4cM" id="Rnx-Kz-PeO"/>
                         <outlet property="nameLabel" destination="qIz-uV-S1Y" id="TsP-90-SC7"/>
                         <outlet property="nextEvoImage" destination="Yj7-po-w31" id="cI7-mU-1G0"/>
                         <outlet property="pokedexLabel" destination="m3b-bt-eX8" id="obj-sS-Ktt"/>

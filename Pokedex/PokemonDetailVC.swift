@@ -23,6 +23,16 @@ class PokemonDetailVC: UIViewController {
     @IBOutlet weak var nextEvoImage: UIImageView!
     @IBOutlet weak var evoLabel: UILabel!
     
+    @IBOutlet weak var chooseSegment: UISegmentedControl!
+    // for fields' titles
+    @IBOutlet weak var moveName: UILabel!
+    @IBOutlet weak var moveCategory: UILabel!
+    @IBOutlet weak var moveLevelType: UILabel!
+    @IBOutlet weak var movePower: UILabel!
+    @IBOutlet weak var moveID: UILabel!
+    @IBOutlet weak var moveAccuracy: UILabel!
+    
+    
     var pokemon: Pokemon!
 
     override func viewDidLoad() {
@@ -38,6 +48,13 @@ class PokemonDetailVC: UIViewController {
     }
     
     func updateUI() {
+        moveName.text = "Poke Type: "
+        movePower.text = "Defense: "
+        moveCategory.text = "Height: "
+        moveID.text = "Pokedex ID: "
+        moveLevelType.text = "Weight: "
+        moveAccuracy.text = "Base Attack: "
+
         descriptionLabel.text = pokemon.description
         typeLabel.text = pokemon.type
         defenseLabel.text = pokemon.defense
@@ -59,24 +76,52 @@ class PokemonDetailVC: UIViewController {
         }
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func showArbitraryMove() {
+        let idx = Int(arc4random_uniform(UInt32(pokemon.moves.count)))
+        let move = pokemon.moves[idx]
+        descriptionLabel.text = move.description
+        
+        moveName.text = "Move Name: "
+        typeLabel.text = move.name
+        
+        movePower.text = "Power: "
+        defenseLabel.text = move.power
+        
+        moveCategory.text = "Category: "
+        if move.category != "" {
+            heightLabel.text = move.category
+        } else {
+            heightLabel.text = "-"
+        }
+        
+        
+        moveID.text = "Move ID: "
+        pokedexLabel.text = move.moveId
+        
+        moveLevelType.text = "Learn Type: "
+        weightLabel.text = move.learnType
+        
+        moveAccuracy.text = "Accuracy: "
+        baseAttackLabel.text = move.accuracy
     }
+
     
     @IBAction func backButtonPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func selectedSegmentAction(sender: UISegmentedControl) {
+        if sender == chooseSegment {
+            switch sender.selectedSegmentIndex {
+            case 0:
+                updateUI()
+            case 1:
+                showArbitraryMove()
+            default:
+                break
+            }
+        }
     }
-    */
 
 }

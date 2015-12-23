@@ -22,6 +22,7 @@ class Pokemon {
     private var _nextEvolutionId: String!
     private var _nextEvolutionLevel: String!
     private var _pokemonUrl: String!
+    private var _moves: [PokeMove]!
     
     var name: String {
         return _name
@@ -71,6 +72,18 @@ class Pokemon {
             _attack = "-"
         }
         return _attack
+    }
+    
+    var moves: [PokeMove] {
+        get {
+            if _moves == nil {
+                _moves = [PokeMove]()
+            }
+            return _moves
+        }
+        set (newVal) {
+            _moves = newVal
+        }
     }
     
     var nextEvolutionText: String {
@@ -153,6 +166,26 @@ class Pokemon {
                     self._description = "None"
                 }
                 
+                if let movesArr = dict["moves"] as? [Dictionary<String, AnyObject>] where movesArr.count > 0 {
+                    for item in movesArr {
+                        if let uri = item["resource_uri"] as? String {
+                            let name: String?
+                            let type: String?
+                            let move: PokeMove!
+                            
+                            let moveId = uri.stringByReplacingOccurrencesOfString(URL_MOVE, withString: "").stringByReplacingOccurrencesOfString("/", withString: "")
+
+                            name = item["name"] as? String ?? ""
+                            type = item["learn_type"] as? String ?? ""
+                            move = PokeMove(name: name!, moveId: moveId, learnType: type!)
+                            move.downloadPokeMoveDetails { () -> () in
+                                self.moves.append(move)
+                            }
+                            
+                        }
+                    }
+                }
+                
                 if let evolutions = dict["evolutions"] as? [Dictionary<String, AnyObject>] where evolutions.count > 0 {
                     if let to = evolutions[0]["to"] as? String {
                         // Can't support mega pokemon right now but
@@ -162,7 +195,7 @@ class Pokemon {
                                 self._nextEvolutionLevel = "\(level)"
                             }
                             if let uri = evolutions[0]["resource_uri"] as? String {
-                                let num = uri.stringByReplacingOccurrencesOfString("/api/v1/pokemon/", withString: "").stringByReplacingOccurrencesOfString("/", withString: "")
+                                let num = uri.stringByReplacingOccurrencesOfString(URL_POKEMON, withString: "").stringByReplacingOccurrencesOfString("/", withString: "")
                                 self._nextEvolutionId = num
                                 self._nextEvolutionText = to
                             }
